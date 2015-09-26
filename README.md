@@ -1,10 +1,10 @@
 # solutions
 
-My first repository on GitHub, I am going to put the solutions to Algorithms in C in it.
+My first repository on GitHub, I am going to put the solutions to *Algorithms in C* in it.
 
 ##About the book
 
-Algorithms in C is an introductory algorithm book by Robert Sedgewick. The one I refer to is the Parts 1-4 of it, which is about fundamentals, data structures, sorting and searching. And these solutions are corresponding to the third edition of the book.
+*Algorithms in C* is an introductory algorithm book by *Robert Sedgewick*. The one I refer to is the Parts 1-4 of it, which is about fundamentals, data structures, sorting and searching. And these solutions are corresponding to the third edition of the book.
 
 ##About the solutions
 
@@ -15,4 +15,4 @@ Algorithms in C is an introductory algorithm book by Robert Sedgewick. The one I
 
 ##Something else
 
-If you have any idea or complaint about this solution, welcome to email me: dxy950608@outlook.com. That is all. Hope it will help a little.
+If you have any idea or complaint about this solution, welcome to email me: dxy950608@outlook.com. That is all. Hope it will help a little. Thanks.
