@@ -1,6 +1,6 @@
 # solutions
 
-My first repository on GitHub, I am going to put the solutions to *Algorithms in C* in it.
+This is my first repository on GitHub, I am going to put the solutions to *Algorithms in C* in it.
 
 ##About the book
 
