@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 
+
 typedef struct node* link_t;
 
 struct node{
