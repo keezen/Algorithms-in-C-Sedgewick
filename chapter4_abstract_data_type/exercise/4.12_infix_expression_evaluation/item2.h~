@@ -1,0 +1,6 @@
+#ifndef ITEM1_H
+#define ITEM1_H
+
+typedef double item2_t;
+
+#endif

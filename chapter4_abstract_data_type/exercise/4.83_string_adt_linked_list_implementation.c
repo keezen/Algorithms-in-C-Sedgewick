@@ -1,0 +1,117 @@
+#include<stdlib.h>
+#include<stdio.h>
+#include"string.h"
+
+typedef struct node* link_t;
+struct node{
+	char item;
+	link_t next;
+};
+struct string{
+	int len;
+	link_t head;
+	link_t tail;
+};
+
+str_t stringCrea(int N,char *sour)
+{
+	str_t dest=malloc(sizeof(*dest));
+	int i;
+	link_t x;
+	
+	dest->head = dest->tail = NULL;
+
+	for(i=0;sour[i]!=0;i++){
+		x=malloc(sizeof(*x));
+		x->item = sour[i];
+		x->next = NULL;
+
+		if(dest->tail == NULL){
+			dest->head = dest->tail =x;
+			continue;
+		}
+			
+		dest->tail->next=x;
+		dest->tail=x;
+	}
+	
+	dest->len=i;
+	
+	return(dest);
+}
+
+int stringLeng(str_t s)
+{
+	return(s->len);
+}
+
+int stringComp(str_t s1,str_t s2)
+{
+	link_t x,y;
+
+	for(x=s1->head,y=s2->head;x!=NULL && y!=NULL && x->item==y->item;x=x->next,y->next)
+			;
+	
+	if(x==NULL || y==NULL)
+		return(0);
+	if(x->item - y->item > 0)
+		return(1);
+	if(x->item - y->item < 0)
+		return(-1);
+}
+
+str_t stringConcat(str_t s1,str_t s2)
+{
+	link_t x,t;
+	
+	for(x=s2->head;x!=NULL;x=x->next){
+		t=malloc(sizeof(*t));
+		t->item = x->item;
+		t->next = NULL;
+	
+		s1->tail->next=t;
+		s1->tail=t;
+	}
+
+	s1->len += s2->len;
+
+	return(s1);
+}
+
+str_t stringCopy(str_t s1,str_t s2)
+{
+	link_t x,t;
+	
+	while(s1->head != NULL){
+		x=s1->head;
+		s1->head=s1->head->next;
+		free(x);
+	};
+	s1->tail=NULL;
+
+	for(x=s2->head;x!=NULL;x=x->next){
+		t=malloc(sizeof(*x));
+		t->item = x->item;
+		t->next = NULL;
+
+		if(s1->tail == NULL){
+			s1->head = s1->tail = x;
+			continue;
+		}
+			
+		s1->tail->next=x;
+		s1->tail=x;
+	}
+	
+	s1->len=s2->len;		
+	
+	return(s1);
+}
+
+void stringPrint(str_t s)
+{
+	link_t x;
+
+	for(x=s->head;x!=NULL;x=x->next)
+		putchar(x->item);
+}
