@@ -1,4 +1,4 @@
-# solutions
+# Solutions to *Algorithms in C*
 
 This is my first repository on GitHub, I am going to put the solutions to *Algorithms in C* in it.
 
