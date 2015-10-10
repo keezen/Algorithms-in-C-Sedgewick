@@ -1,0 +1,45 @@
+#include"item.h"
+
+typedef struct node* link_t;
+struct node{
+	item_t item;
+};
+
+int count(link_t x)
+{
+	if(x==NULL)
+		return(0);
+	return(1+count(x->next));
+}
+
+void traverse(link_t x,,void (*visit)(link_t))
+{
+	if(x==NULL)
+		return;
+	visit(x);
+	traverse(x->next,visit);
+}
+
+void traverseR(link_t x,,void (*visit)(link_t))
+{
+	if(x==NULL)
+		return;
+	traverse(x->next,visit);
+	visit(x);
+}
+
+link_t delete(link_t x,item_t v)
+{
+	link_t t;
+
+	if(x==NULL)
+		return(NULL);
+	if(eq(x->item,v)){
+		t=x->next;
+		free(x)
+		return(t);
+	}
+
+	x->next=delete(x->next,item);
+	return(x);
+}

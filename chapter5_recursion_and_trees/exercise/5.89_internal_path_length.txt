@@ -1,0 +1,39 @@
+    #
+  H
+        #
+      G
+        #
+    F
+      #
+E
+    #
+  D
+        #
+      C
+        #
+    B
+        #
+      A
+        #
+
+path_length(E,0)
+	path_length(D,1)
+		path_length(B,2)
+			path_length(A,3)
+				path_length(#,4)
+				path_length(#,4)
+			path_length(C,3)
+				path_length(#,4)
+				path_length(#,4)
+		path_length(#,2)
+	path_length(H,1)
+		path_length(F,2)
+			path_length(#,3)
+			path_length(G,3)
+				path_length(#,4)
+				path_length(#,4)
+		path_length(#,2)
+
+internal path length:15
+number of function calls:17	
+/* C(N)=2N+1, N is the number of internal nodes, while C(N) is the number of function calls, which equals to the number of all nodes. */

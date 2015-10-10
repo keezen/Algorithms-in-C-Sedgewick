@@ -1,0 +1,12 @@
+eval() + * * 12 12 12 144
+	eval() * * 12 12 12
+		eval() * 12 12
+			eval() 12
+			eval() 12
+			return 144 = 12*12
+		eval() 12
+		return 1728 = 144*12
+	eval() 144
+	return 1872 = 1728+144
+	
+
