@@ -1,0 +1,5 @@
+N	Random	In-oder	Reverse	Same	Two
+1000	10	5	10	5	7
+2000	32	22	40	21	26
+4000	141	86	195	86	113
+

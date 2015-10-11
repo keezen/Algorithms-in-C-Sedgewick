@@ -1,0 +1,8 @@
+Sequence: 1 2 4 8 16 32 64 128 ...
+File: 1,2,...,N in the odd positions and N+1,N+2,...,2N in the even positions.
+
+N	Time
+1000	9
+2000	28
+4000	105
+8000	414

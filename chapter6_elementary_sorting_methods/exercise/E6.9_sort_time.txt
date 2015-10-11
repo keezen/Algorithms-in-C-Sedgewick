@@ -1,0 +1,4 @@
+N	Insertion Sort Time
+1000	9.8
+2000	34.4
+4000	129.6

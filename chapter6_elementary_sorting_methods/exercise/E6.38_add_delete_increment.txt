@@ -1,0 +1,25 @@
+N=10000
+sequence: 1 8 23 77 281 1073 4193 16577
+sort time: 0.006125s
+
+sequence: 1 5 8 23 77 281 1073 4193 16577
+sort time: 0.006177s
+
+sequence: 1 23 77 281 1073 4193 16577
+sort time: 0.005961s
+
+sequence: 1 8 77 281 1073 4193 16577
+sort time: 0.005067s
+
+sequence: 1 8 23 281 1073 4193 16577
+sort time: 0.004961s
+
+sequence: 1 8 23 77 1073 4193 16577
+sort time: 0.005014s
+
+sequence: 1 8 23 77 281 4193 16577
+sort time: 0.004648s
+
+sequence: 1 8 23 77 281 1073 16577
+sort time: 0.004492s
+
