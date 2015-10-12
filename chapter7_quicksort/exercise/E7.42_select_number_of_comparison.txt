@@ -1,0 +1,9 @@
+/*
+** Number of comparisons required, on the average, to find the
+** aNth smallest element using select, for a = 0.1, 0.2, ..., 0.9.
+*/
+N		a=0.1	a=0.2	a=0.5	a=0.9
+1,000		2242	2735	3392	1807	
+2,000		6941	4662	7301	5171
+4,000		10660	10105	13731	10863
+

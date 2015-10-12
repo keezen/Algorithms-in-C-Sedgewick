@@ -1,0 +1,9 @@
+/*
+** Number of comparisons required in the worst case to
+** find the median of N elements using select. It is 
+** apparent that the number is nearly N^2/2.
+*/
+N		Com		N^2/2
+1,01		5,200		5,101
+1,001		502,000		501,001
+10,001		50,020,000	50,010,001

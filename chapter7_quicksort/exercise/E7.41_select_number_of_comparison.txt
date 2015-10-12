@@ -1,0 +1,10 @@
+/*
+** Number of comparisons required, on the average, to find the
+** smallest of N elements using select.
+*/
+N		Com
+1,000		1860
+2,000		4502		
+4,000		7072
+8,000		15347
+

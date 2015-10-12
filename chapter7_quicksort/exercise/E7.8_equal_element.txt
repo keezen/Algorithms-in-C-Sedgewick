@@ -1,0 +1,7 @@
+/*
+** Number of comparions when N elements are equal.
+*/
+N	C(N)		NlgN
+1000	8898		9965
+10000	121,034		132,877
+100000	1,561,130	1,660,964

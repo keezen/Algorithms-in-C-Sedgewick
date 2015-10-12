@@ -1,0 +1,8 @@
+/*
+** Number of comparions quicksort make when N elements have
+** two different keys.
+*/
+N	C(N)		NlgN
+1000	9097		9965
+10000	123,886		132,877
+100000	1,570,469	1,660,964

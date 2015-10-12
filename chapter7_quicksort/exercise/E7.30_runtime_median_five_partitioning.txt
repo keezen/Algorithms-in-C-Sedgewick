@@ -1,0 +1,17 @@
+/*
+** M is the cutoff of the small subfile, which will be sorted by insertion
+** sort.
+*/
+M=9
+
+
+N		Ran		Sor		Rev		Equ
+1,000		39		36		32		22
+10,000		408		327		342		274
+100,000		4247		2879		3048		3149
+1,000,000	50496		31067		32751		35394
+
+Ran -- random files
+Sor -- sorted files
+Rev -- reverse-order files
+Equ -- equal-key files
