@@ -1,0 +1,7 @@
+N		Skip
+1,000		280
+10,000		2,861
+100,000		28,699
+1,000,000	291,967
+
+Skip -- the average number of times the merge is skipped, for large random files

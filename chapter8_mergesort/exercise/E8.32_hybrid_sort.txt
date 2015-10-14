@@ -1,0 +1,9 @@
+N		Qui		Mer		Hyb
+1,000		31		43		39
+10,000		396		533		413
+100,000		4,241		4,966		4,487
+1,000,000	47,400		57,322		54,134
+
+Qui -- quicksort with small file cutoff
+Mer -- mergesort with small file cutoff
+Hyb -- hybrid sort with different cutoffs combining mergesort, quicksort, and insertion sort

@@ -1,0 +1,91 @@
+/*
+** The program of abstract in-place merge.
+*/
+#include<stdio.h>
+#include<stdlib.h>
+#include<time.h>
+#include"item.h"
+
+#define N 10
+
+void merge(item_t *a,int left,int middle,int right);
+void bubble_sort(item_t *array,int left,int right);
+void print_array(item_t *array,int n_elements);
+
+void print_array(item_t *array,int n_elements)
+{
+	int i;
+
+	for(i=0;i<n_elements;i++){
+		print_item(array[i]);
+		putchar(' ');
+	}
+	putchar('\n');
+}
+
+void bubble_sort(item_t *array,int left,int right)
+{
+	int i,j;
+
+	for(i=left;i<right;i++){
+		for(j=right;j>i;j--){
+			if(compare_item(array[j],array[j-1]) < 0){
+				swap_item(&array[j],&array[j-1]);
+			}
+		}
+	}
+}
+
+/*
+** This fuction merges two ordered parts of the array a, without using 
+** sentinels by copying the second array into aux iin reverse order back
+** to back with th first (putting aux in bitonic order).
+*/
+void merge(item_t *a,int left,int middle,int right)
+{
+	int n=right-left+1;
+	item_t *aux=malloc(n*sizeof(*aux));
+	int i,j,k;
+	
+	for(k=0,i=left;i<=middle;i++){
+		aux[k++]=a[i];
+	}
+	for(i=right;i>middle;i--){
+		aux[k++]=a[i];
+	}
+
+	/*
+	** In this merge loop, the largest element serves as the sentinel
+	** in whichever array it is. 
+	*/
+	for(i=0,j=n-1,k=left;k<=right;k++){
+		if(compare_item(aux[i],aux[j])<0){
+			a[k]=aux[i++];	
+		}else{
+			a[k]=aux[j--];	
+		}
+	}
+
+	free(aux);
+}
+
+int main(void)
+{
+	item_t a[N];
+	int i;
+
+	srand((unsigned)time(NULL));
+
+	for(i=0;i<N;i++){
+		a[i]=rand()%N;
+	}
+
+	bubble_sort(a,0,(N-1)/2);
+	bubble_sort(a,(N-1)/2+1,N-1);
+	print_array(a,N);
+
+	merge(a,0,(N-1)/2,N-1);
+	print_array(a,N);
+
+	return(0);
+}

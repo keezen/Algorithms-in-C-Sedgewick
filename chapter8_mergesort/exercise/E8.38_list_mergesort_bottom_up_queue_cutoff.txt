@@ -1,0 +1,10 @@
+M=9
+
+N		Bot		Cut
+1,000		76		39
+10,000		801		462
+100,000		11,199		8,145
+1,000,000	144,210		114,997
+
+Bot -- original bottom-up mergesort using a queue ADT
+Cut -- bottom-up mergesort using a queue, with cutoff for small subfiles of size M

@@ -1,0 +1,10 @@
+M=9
+
+N		Cir		Cut
+1,000		64		39
+10,000		590		514
+100,000		10,291		8,123
+1,000,000	135,027		113,181
+
+Cir -- original bottom-up mergesort using a circular linked list
+Cut -- bottom-up mergesort using a circular list, with cutoff for small subfiles of size M

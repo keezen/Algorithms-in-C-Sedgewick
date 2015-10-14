@@ -1,0 +1,127 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<time.h>
+#include"item.h"
+
+#define M 3
+
+void merge_ab(item_t *c,item_t *a,int m,item_t *b,int n);
+void merge_sort_ab(item_t *a,item_t *b,int left,int right);
+void merge_sort(item_t *array,int left,int right);
+void insertion_sort(item_t *array,int left,int right);
+void print_array(item_t *array,int n_elements);
+
+void print_array(item_t *array,int n_elements)
+{
+	int i;
+
+	for(i=0;i<n_elements;i++){
+		print_item(array[i]);
+		putchar(' ');
+	}
+	putchar('\n');
+}
+
+void merge_ab(item_t *c,item_t *a,int m,item_t *b,int n)
+{
+	int i,j,k;
+
+	for(i=0,j=0,k=0;k<m+n;k++){
+		if(i==m){
+			c[k]=b[j++];
+			continue;
+		}
+		if(j==n){
+			c[k]=a[i++];
+			continue;	
+		}
+
+		if(compare_item(a[i],b[j])<0){
+			c[k]=a[i++];
+		}else{
+			c[k]=b[j++];
+		}
+	}
+}
+
+/*
+** The merge_sort_ab is set up to sort b, leaving the result in a.
+*/
+void merge_sort_ab(item_t *a,item_t *b,int left,int right)
+{
+	int middle=(left+right)/2;
+	int i;
+
+	/*
+	** Insertion sort is used for the small subfile.
+	*/
+	if(right-left+1<=M){
+		insertion_sort(b,left,right);
+		for(i=left;i<=right;i++){
+			a[i]=b[i];
+		}
+		return;
+	}
+
+	merge_sort_ab(a,b,left,middle);
+	merge_sort_ab(a,b,middle+1,right);
+	
+	merge_ab(b+left,a+left,middle-left+1,a+middle+1,right-middle);
+	for(i=left;i<=right;i++){
+		a[i]=b[i];
+	}
+}
+
+void merge_sort(item_t *array,int left,int right)
+{
+	int n=right-left+1;
+	item_t *aux=malloc(n*sizeof(*aux));
+	int i;
+
+	for(i=0;i<n;i++){
+		aux[i]=array[i];
+	}
+
+	merge_sort_ab(array,aux,left,right);
+}
+
+void insertion_sort(item_t *array,int left,int right)
+{
+	int i,j;
+	item_t temp;
+
+	for(i=left+1;i<=right;i++)
+		if(compare_item(array[i],array[left]) < 0)
+			swap_item(&array[i],&array[left]);
+
+	for(i=left+2;i<=right;i++){
+		temp=array[i];
+
+		for(j=i-1;compare_item(array[j],temp) > 0;j--){
+			array[j+1]=array[j];
+		}
+
+		array[j+1]=temp;
+	} 
+}
+
+int main(int argc,char *argv[])
+{
+	int N=atoi(argv[1]);
+	item_t *array=malloc(N*sizeof(*array));
+	int i;
+
+	srand((unsigned)time(NULL));
+
+	for(i=0;i<N;i++){
+		array[i]=rand()%N;
+	}
+	print_array(array,N);
+
+	merge_sort(array,0,N-1);
+	print_array(array,N);
+
+	free(array);
+
+	return(0);
+}

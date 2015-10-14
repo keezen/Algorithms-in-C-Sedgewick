@@ -1,0 +1,8 @@
+N		Ori		Mod
+1000		9,976		0
+2000		21,952		0
+4000		47,904		0
+8000		103,808		0
+
+Ori -- the number of comparisons of original mergesort
+Mod -- the number of comparisond of modified mergesort

@@ -1,0 +1,126 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<time.h>
+#include"olist.h"
+#include"item.h"
+
+link_t merge_list(link_t heada,link_t headb);
+link_t mergesort_list(link_t head);
+
+link_t merge_list(link_t heada,link_t headb)
+{
+	link_t c,t;
+	link_t head=malloc(sizeof(*head));
+	
+	c=head;
+	c->next=NULL;
+	while(heada!=NULL && headb!=NULL){
+		if(compare_item(heada->item,headb->item)<=0){
+			t=heada;
+			heada=t->next;
+			t->next=NULL;
+
+			c->next=t;
+			c=t;
+		}else{
+			t=headb;
+			headb=t->next;
+			t->next=NULL;
+
+			c->next=t;
+			c=t;
+		}
+	}
+
+	if(heada==NULL){
+		c->next=headb;
+	}else{
+		c->next=heada;
+	}
+
+	t=head;
+	head=head->next;
+	free(t);
+
+	return(head);
+}
+
+/*
+** The implementation of bottom-up mergesort using a circular linked
+** list. We maintain a circular list whose elements are dumb headers
+** pointing out to sorted lists. We proceed through the circular list
+** , merge together pairs of adjacent ordered subfiles, until there is only
+** one node in the circular list. So the whole list is sorted.
+*/
+link_t mergesort_list(link_t head)
+{
+	link_t new,t,a,b;
+	link_t circle_h,circle_t;
+
+	if(head==NULL || head->next==NULL){
+		return(head);
+	}
+	
+	/*
+	** Constuct the circular list, every dumb header points to
+	** a single element, which can be considered as a sorted list.
+	*/ 
+	circle_h=circle_t=NULL;
+	while(head!=NULL){
+		t=head;
+		head=head->next;
+		t->next=NULL;
+
+		new=malloc(sizeof(*new));
+		new->item=0;
+		new->out=t;
+		if(circle_t==NULL){
+			circle_h=circle_t=new;
+			new->next=circle_h;
+		}else{
+			circle_t->next=new;
+			new->next=circle_h;
+			circle_t=new;
+		}
+	}
+
+	/*
+	** Merge pairs of subfiles pointed to by a->out and b->out,
+	** put the resultant ordered list int a->out. Delete dumb 
+	** header b from the circular list. Then repeat this process
+	** on the next pair, until one dumb header left.
+	*/
+	for(a=circle_h;(a->next)!=a;a=a->next){
+		b=a->next;
+
+		a->out=merge_list(a->out,b->out);
+		a->next=b->next;
+		free(b);
+	}
+	
+	head=a->out;
+	free(a);
+
+	return(head);
+}
+
+int main(int argc,char *argv[])
+{
+	link_t head,t;
+	int N=atoi(argv[1]);
+	int i;
+
+	srand((unsigned)time(NULL));
+
+	head=new_node(rand()%N);
+	for(i=1;i<=N-1;i++){
+		t=new_node(rand()%N);
+		insert_next(head,t);
+	}
+	print_list(head);
+
+	head=mergesort_list(head);
+	print_list(head);
+
+	return(0);
+}

@@ -1,0 +1,10 @@
+M=9
+
+N		Mer		Cut
+1,000		56		43
+10,000		638		560
+100,000		7,233		6,445
+1,000,000	107,244		97,583
+
+Mer -- original top-down recursive mergesort
+Cur -- top-down recursive mergesort with cutoff for small subfiles of size M

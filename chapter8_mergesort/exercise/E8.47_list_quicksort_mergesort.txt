@@ -1,0 +1,8 @@
+N		Mer		Qui
+1,000		56		40
+10,000		718		547
+100,000		7,314		9,210
+1,000,000	107,729		174,107
+
+Mer -- top-down mergesort for linked list
+Qui -- quicksort for linked list
