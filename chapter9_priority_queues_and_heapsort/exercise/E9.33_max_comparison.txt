@@ -1,0 +1,10 @@
+N=32
+
+		Ran	Ord	Rev	Sam	Two
+Comparison	221	231	201	90	155
+
+Ran -- number of comparisons of random keys
+Ord -- number of comparisons of orderd keys
+Rev -- number of comparisons of keys in reverse order
+Sam -- number of comparisons of keys all the same
+Two -- number of comparisons of two distinct keys

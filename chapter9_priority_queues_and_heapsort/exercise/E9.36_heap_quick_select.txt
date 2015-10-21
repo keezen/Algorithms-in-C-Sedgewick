@@ -1,0 +1,13 @@
+N=1,000,000
+
+k		Heap1		Heap2		Quick
+10		1,881,576	1,000,458	2,863,699
+100		1,885,073	1,009,916	1,391,878
+1,000		1,919,899	1,117,463	2,223,626
+10,000		2,260,107	2,104,139	3,246,801
+100,000		5,645,444	8,063,202	2,420,559
+1,000,000	36,792,273	1,881,067	2,747,798
+
+Heap1 -- number of comparisons using heap_select_v1 to select the kth largest element
+Heap2 -- number of comparisons using heap_select_v2 to select the kth largest element
+Quick -- number of comparisons using quick_select to select the kth largest element

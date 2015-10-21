@@ -1,0 +1,8 @@
+N		Ter		Bin
+1,000		16,443		16,833
+10,000		226,717		235,432
+100,000		2,897,061	3,019,708
+1,000,000	35,291,784	36,794,776
+
+Ter -- number of comparisons by ternary-tree heapsort
+Bin -- number of comparisons by binary-tree heapsort

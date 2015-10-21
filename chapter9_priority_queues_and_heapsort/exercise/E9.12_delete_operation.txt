@@ -1,0 +1,9 @@
+Priority queue length = 1000
+
+Random length		Del
+1,000			70,926
+10,000			70,908
+100,000			67,371
+1,000,000		73,492
+
+Del -- number of pqueue_del_max operations in one second

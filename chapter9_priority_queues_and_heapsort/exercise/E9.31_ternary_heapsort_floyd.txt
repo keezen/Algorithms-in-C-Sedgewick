@@ -1,0 +1,8 @@
+N		Floyd		Ter
+1,000		11,001		16,403
+10,000		151,522		226,339
+100,000		1,936,766	2,892,182
+1,000,000	23,577,264	35,210,468
+
+Floyd -- number of comparisons by binary-tree heapsort with Floyd's method
+Ter   -- number of comparisons by standard ternary-tree heapsort

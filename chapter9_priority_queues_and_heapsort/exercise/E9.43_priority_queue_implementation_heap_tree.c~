@@ -1,0 +1,418 @@
+/*
+** This implementation for the priority queue interface, which includes
+** insert, delete the maximum, change prioriry, and delete operations, uses
+** heap-ordered trees with explicit links. Because the client has handles into
+** the data structure, you should exchange the nodes themselves instead of
+** the information fields.
+*/
+#include<stdlib.h>
+#include<stdio.h>
+#include<assert.h>
+#include"pqueue.h"
+#include"item.h"
+
+struct PQUEUE_NODE{
+	item_t item;
+	pqueue_link_t parent;
+	pqueue_link_t left;
+	pqueue_link_t right;
+};
+
+static void do_pqueue_print(pqueue_link_t r);
+static void heapify_bottom_up(pqueue_link_t x);
+static void heapify_top_down(pqueue_link_t x);
+static void swap_node(pqueue_link_t a,pqueue_link_t b);
+
+static pqueue_link_t root;
+static pqueue_link_t end;
+
+void pqueue_init(int Nmax)
+{
+	root=end=NULL;
+}
+
+int pqueue_empty(void)
+{
+	return(root==NULL);
+}
+
+pqueue_link_t pqueue_insert(item_t item)
+{
+	pqueue_link_t new;
+	pqueue_link_t x;
+
+	new=malloc(sizeof(*new));
+	copy_item(&(new->item),&item);
+	new->parent=new;
+	new->left=NULL;
+	new->right=NULL;
+
+	if(root==NULL){
+		root=end=new;
+		return(new);
+	}
+
+	if(end==root){
+		end->left=new;
+		new->parent=root;
+		end=new;
+
+		heapify_bottom_up(end);
+
+		return(new);
+	}
+
+	if(end->parent->left==end){
+		end->parent->right=new;
+		new->parent=end->parent;
+		end=new;
+
+		heapify_bottom_up(end);
+
+		return(new);
+	}
+
+	if(end->parent->right==end){
+		for(x=end;x->parent->right==x;x=x->parent)
+			;
+		if(x!=root){
+			x=x->parent->right;
+		}
+		for(;x->left!=NULL;x=x->left)
+			;
+	
+		x->left=new;
+		new->parent=x;
+		end=new;
+
+		heapify_bottom_up(end);
+
+		return(new);
+	}
+}
+
+item_t pqueue_del_max(void)
+{
+	item_t max_item;
+	pqueue_link_t t,x;
+
+	assert(!pqueue_empty());
+
+	copy_item(&max_item,&(root->item));
+
+	if(end==root){
+		free(root);
+		root=end=NULL;
+
+		return(max_item);
+	}
+
+	if(end->parent->right==end){
+		swap_node(end,root);
+
+		t=end;
+		end->parent->right=NULL;
+		end=end->parent->left;
+		free(t);
+
+		heapify_top_down(root);
+		return(max_item);
+	}
+
+	if(end->parent->left==end){
+		swap_node(end,root);
+
+		t=end;
+		end->parent->left=NULL;
+		x=end->parent;
+		free(t);
+
+		for(;x->parent->left==x;x=x->parent)
+			;
+		if(x!=root){
+			x=x->parent->left;
+		}
+		for(;x->right!=NULL;x=x->right)
+			;
+		end=x;
+	
+		heapify_top_down(root);
+
+		return(max_item);
+	}
+}
+
+void pqueue_change(pqueue_link_t node,item_t new_item)
+{
+	copy_item(&(node->item),&new_item);
+	
+	heapify_top_down(node);
+	heapify_bottom_up(node);
+}
+
+void pqueue_delete(pqueue_link_t node)
+{
+	pqueue_link_t t,x,y;
+
+	y=end;
+	swap_node(node,end);
+
+	if(end==root){
+		free(root);
+		root=end=NULL;
+
+		return;
+	}
+
+	if(end->parent->right==end){
+		t=end;
+		end->parent->right=NULL;
+		end=end->parent->left;
+		free(t);
+
+		heapify_top_down(y);
+
+		return;
+	}
+
+	if(end->parent->left==end){
+		t=end;
+		end->parent->left=NULL;
+		x=end->parent;
+		free(t);
+
+		for(;x->parent->left==x;x=x->parent)
+			;
+		if(x!=root){
+			x=x->parent->left;
+		}
+		for(;x->right!=NULL;x=x->right)
+			;
+		end=x;
+
+		heapify_top_down(y);
+
+		return;
+	}
+}
+
+void pqueue_print(void)
+{
+	do_pqueue_print(root);
+	putchar('\n');
+}
+
+static void do_pqueue_print(pqueue_link_t r)
+{
+	if(r==NULL){
+		return;
+	}
+
+	print_item(r->item);
+	putchar(' ');
+
+	do_pqueue_print(r->left);
+	do_pqueue_print(r->right);
+}
+
+static void heapify_bottom_up(pqueue_link_t x)
+{
+	pqueue_link_t t;
+
+	t=x;
+	while(t!=root){
+		if(compare_item(t->item,t->parent->item)<=0){
+			break;
+		}
+	
+		swap_node(t,t->parent);
+	}
+}
+
+static void heapify_top_down(pqueue_link_t x)
+{
+	pqueue_link_t current,next;
+
+	current=x;
+	while(current->left!=NULL || current->right!=NULL){
+		next=current->left;
+		if(current->right!=NULL && compare_item(current->right->item,next->item)>0){
+			next=current->right;
+		}
+
+		if(compare_item(current->item,next->item)>=0){
+			break;
+		}
+		swap_node(current,next);
+	}
+}
+
+/*
+** The swap_node function swaps the positions pointed by a and b in the heap
+** tree, with the nodes pointed by a and b unchanged (that means pointers a
+** and b will move as the nodes move). In this process, the root pointer and
+** end pointer maintains their properties, which means they still point to
+** the root and end of the heap tree and they won't move as the nodes move.
+*/
+static void swap_node(pqueue_link_t a,pqueue_link_t b)
+{
+	pqueue_link_t t;
+
+	t=malloc(sizeof(*t));
+
+	if(a==end || b==end){
+		if(a==end){
+			end=b;
+		}else{
+			end=a;
+		}
+	}
+
+	if(a==root){
+		t->left=a->left;
+		t->right=a->right;
+		t->parent=t;
+
+		if(a->left!=NULL){
+			a->left->parent=t;
+		}
+		if(a->right!=NULL){
+			a->right->parent=t;
+		}
+		root=t;
+
+
+		a->left=b->left;
+		a->right=b->right;
+		a->parent=b->parent;
+	
+		if(b->left!=NULL){
+			b->left->parent=a;
+		}
+		if(b->right!=NULL){
+			b->right->parent=a;
+		}
+		if(b->parent->left==b){
+			b->parent->left=a;
+		}else{
+			b->parent->right=a;
+		}
+
+
+		b->left=t->left;
+		b->right=t->right;
+		b->parent=b;
+
+		if(t->left!=NULL){
+			t->left->parent=b;
+		}
+		if(t->right!=NULL){
+			t->right->parent=b;
+		}
+		root=b;
+
+		free(t);					
+		return;	
+	}
+
+	if(b==root){
+		t->left=b->left;
+		t->right=b->right;
+		t->parent=t;
+
+		if(b->left!=NULL){
+			b->left->parent=t;
+		}
+		if(b->right!=NULL){
+			b->right->parent=t;
+		}
+		root=t;
+
+
+		b->left=a->left;
+		b->right=a->right;
+		b->parent=a->parent;
+	
+		if(a->left!=NULL){
+			a->left->parent=b;
+		}
+		if(a->right!=NULL){
+			a->right->parent=b;
+		}
+		if(a->parent->left==a){
+			a->parent->left=b;
+		}else{
+			a->parent->right=b;
+		}
+
+
+		a->left=t->left;
+		a->right=t->right;
+		a->parent=a;
+
+		if(t->left!=NULL){
+			t->left->parent=a;
+		}
+		if(t->right!=NULL){
+			t->right->parent=a;
+		}
+		root=a;
+
+
+		free(t);
+
+		return;	
+	}
+
+	t->left=a->left;
+	t->right=a->right;
+	t->parent=a->parent;
+
+	if(a->left!=NULL){
+		a->left->parent=t;
+	}
+	if(a->right!=NULL){
+		a->right->parent=t;
+	}
+	if(a->parent->left==a){
+		a->parent->left=t;
+	}else{
+		a->parent->right=t;
+	}
+
+
+	a->left=b->left;
+	a->right=b->right;
+	a->parent=b->parent;
+
+	if(b->left!=NULL){
+		b->left->parent=a;
+	}
+	if(b->right!=NULL){
+		b->right->parent=a;
+	}
+	if(b->parent->left==b){
+		b->parent->left=a;
+	}else{
+		b->parent->right=a;
+	}
+
+
+	b->left=t->left;
+	b->right=t->right;
+	b->parent=t->parent;
+
+	if(t->left!=NULL){
+		t->left->parent=b;
+	}
+	if(t->right!=NULL){
+		t->right->parent=b;
+	}
+	if(t->parent->left==t){
+		t->parent->left=b;
+	}else{
+		t->parent->right=b;
+	}
+
+	free(t);	
+}

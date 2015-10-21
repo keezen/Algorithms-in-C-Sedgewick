@@ -1,0 +1,16 @@
+/*
+** It seems that the two numbers of every line are nearly the same.
+** That is the truth, because we only count the number of comparisons.
+** But in fact the pre-order implementation of heapsort takes much more
+** runtime than the standard version so that it can't get results when
+** N=1,000,000 (maybe it is the problem of the awful implementation). So
+** it is highly suggested that you shouldn't use the pre-order implementation.
+*/
+N		Pre		Sta
+1,000		16,834		16,789
+10,000		235,470		235,353
+100,000		3,019,475	3,019,738
+1,000,000	--		36,794,302
+
+Pre -- number of comparisons of the pre-order heapsort
+Sta -- number of comparisons of the standard heapsort

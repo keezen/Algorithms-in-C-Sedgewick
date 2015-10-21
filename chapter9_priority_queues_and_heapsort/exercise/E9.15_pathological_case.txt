@@ -1,0 +1,24 @@
+/*
+** The runtime of pqueue_insert and pqueue_del_max for different number of elements N
+** and different pathological cases, with the ordered linked list priority queue implementation.
+*/
+pqueue_insert:
+N		Ran		Ord		Rev		Sam		Two
+1,000		444		21		653		21		218
+2,000		1,794		37		2,076		35		864
+4,000		6,566		60		7,824		59		3,018
+8,000		26,939		114		29,623		112		10,257
+
+
+pqueue_del_max:
+N		Ran		Ord		Rev		Sam		Two
+1,000		6		6		6		6		6
+2,000		9		11		9		11		11
+4,000		17		22		17		22		16
+8,000		36		44		33		46		33
+
+Ran -- keys of random sequences
+Ord -- keys in order
+Rev -- keys in reverse order
+Sam -- keys all the same
+Two -- keys having only two distinct values

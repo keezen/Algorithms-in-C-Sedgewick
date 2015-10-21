@@ -1,0 +1,10 @@
+Priority queue length = 1000
+
+Random length		Ordered array		Ordered list
+1,000			1,470,325		1,264,305
+10,000			1,474,177		1,321,242
+100,000			1,467,538		1,311,569
+1,000,000		1,457,753		1,227,223
+
+Ordered array -- number of pqueue_del_max operations in one second with the ordered array implementation of priority queue
+Ordered array -- number of pqueue_del_max operations in one second with the ordered list implementation of priority queue
