@@ -15,4 +15,4 @@ This is my first repository on GitHub, I am going to put the solutions to *Algor
 
 ##Something else
 
-If you have any idea or suggestion about this solution, welcome to email me: dxy950608@outlook.com. That is all. Hope it will help a little. Thanks.
+If you have any idea or suggestion about this solution, welcome to email me: dxy950608@outlook.com. Hope it will help a little. Thanks.
