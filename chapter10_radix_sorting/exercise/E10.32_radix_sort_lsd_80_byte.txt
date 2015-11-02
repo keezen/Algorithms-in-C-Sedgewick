@@ -1,0 +1,10 @@
+R=256, bytesword=80
+
+N		MSD		LSD
+1,000		600		15,329
+10,000		4,418		116,819
+100,000		72,136		1,344,448
+1,000,000	618,369		14,810,079
+
+MSD -- the runtime of MSD radix sort when sorting N random keys
+LSD -- the runtime of LSD radix sort when sorting N random keys

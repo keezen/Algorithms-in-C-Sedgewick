@@ -1,0 +1,10 @@
+R=2, bytesword=80
+
+N		MSD		LSD
+1,000		1,851		1,5087
+10,000		27,209		149,642
+100,000		341,399		1,500,982
+1,000,000	3,848,727	14,991,987
+
+MSD -- the runtime of MSD radix sort when sorting N shuffled keys
+LSD -- the runtime of LSD radix sort when sorting N shuffled keys

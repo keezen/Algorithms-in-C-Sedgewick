@@ -1,0 +1,10 @@
+R=256, bytesword=30
+
+N		MSD		Three-Way
+1,000		3,573		1,842
+10,000		16,083		15,419
+100,000		151,940		192,181
+1,000,000	1,576,337	2,000,359
+
+MSD       -- the runtime of MSD radix sort when sorting N format strings
+Three-Way -- the runtime of three-way radix quicksort when sorting N format strings

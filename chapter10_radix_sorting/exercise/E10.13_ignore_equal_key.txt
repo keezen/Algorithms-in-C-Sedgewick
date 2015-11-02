@@ -1,0 +1,8 @@
+N		Modified	Standard
+1,000		47		45
+10,000		542		518
+100,000		4,641		4,259
+1,000,000	39,972		38,987
+
+Modified -- the runtime of the modified binary quicksort which check explicily for the case that all keys are equal
+Standard -- the runtime of the standard binary quicksort

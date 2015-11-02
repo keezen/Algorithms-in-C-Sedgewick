@@ -1,0 +1,10 @@
+R=2, bytesword=80
+
+N		MSD		Three-Way
+1,000		2,176		2,445
+10,000		27,828		36,679
+100,000		337,539		467,166
+1,000,000	4,003,261	5,804,781
+
+MSD       -- the runtime of MSD radix sort when sorting N random keys
+Three-Way -- the runtime of three-way radix quicksort when sorting N random keys

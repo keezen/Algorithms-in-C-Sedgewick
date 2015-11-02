@@ -1,0 +1,16 @@
+/*
+** This item data type interface includes a new function compare_item_digit,
+** which compares the digit_order-th byte of the words in the two items. 
+*/
+#ifndef ITEM_RADIX_H
+#define ITEM_RADIX_H
+
+typedef int item_t;
+
+void swap_item(item_t *a,item_t *b);
+void copy_item(item_t *a,item_t *b);
+int compare_item(item_t a,item_t b);
+int compare_item_digit(item_t a,item_t b,int digit_order);
+void print_item(item_t x);
+
+#endif

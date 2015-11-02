@@ -1,0 +1,12 @@
+/*
+** The runtimes of extracting digits using bit-shifting and arithmetic operations, when
+** a random digit of every of N elements is extracted.
+*/
+N		Bit		Ari
+1,000		3		25
+10,000		29		223
+100,000		288		1,797
+1,000,000	2,144		16,332
+
+Bit -- the runtime for bit-shifting operations
+Ari -- the runtime for arithmetic operations

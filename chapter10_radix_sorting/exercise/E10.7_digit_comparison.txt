@@ -1,0 +1,7 @@
+N		Digit
+1,000		4,116
+10,000		51,496
+100,000		614,183
+1000,000	7,139,534
+
+Digit -- the number of digits examined to sort a file of N decimal numbers between 0 and 1 in gaussian distribution

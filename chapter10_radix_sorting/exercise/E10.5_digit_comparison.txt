@@ -1,0 +1,7 @@
+N		Digit
+1,000		3,736
+10,000		47,217
+100,000		573,938
+1000,000	6,737,159
+
+Digit -- the number of digit comparisons needed to sort a file of N random decimal numbers between 0 and 1 (you can also say it is the number of digits examined)

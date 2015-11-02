@@ -1,0 +1,7 @@
+/*
+** The runtime for different byte sizes when sorting N random 64-bit keys.
+*/
+N		Bitsbyte=1	=2		=4		=8		=16
+1,000		175		47		32		21		486
+10,000		18,817		2,408		411		292		841
+100,000		2,073,887	217,812		5916		2,634		3,366

@@ -1,0 +1,7 @@
+N		Digit
+1,000		12,283
+10,000		155,959
+100,000		1,894,550
+1000,000	22,264,609
+
+Digit -- the number of digit comparisons needed to sort a file of N random 32-bit integers, with byte size is 1 bit such that R=2 (you can also say it is the number of digits examined)
