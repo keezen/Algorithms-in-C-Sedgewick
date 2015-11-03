@@ -1,0 +1,10 @@
+R=2, bytesword=32
+
+/*
+** The runtime of four different sorting methods when sorting N random 32-bit keys.
+*/
+N		Quick		MSD		LSD		Heap
+1,000		33		146		91		54
+10,000		418		2,174		1,368		837
+100,000		4,204		18,681		13,846		9,128
+1000,000	50,220		193,196		156,862		116,901

@@ -1,0 +1,153 @@
+/*
+** This program implements a sequential version of block sorting: (i) use standard mergesort
+** to sort the blocks, (ii) use the standard abstract in-place merge to implement the merging
+** comparators, (iii) use nonrecursive Batcher's odd-even sort to implement the block sort.
+*/
+#include<stdio.h>
+#include<stdlib.h>
+#include<time.h>
+#include"item.h"
+
+/* The macro M determines the size of every block. */
+#define M 5
+
+
+void print_block(item_t (*blocks)[M],int n_blocks);
+
+void block_sort(item_t (*blocks)[M],int left,int right);
+void do_block_sort(item_t (*blocks)[M],int left,int right);
+void merge_compare(item_t *b1,item_t *b2);
+
+void merge_sort(item_t *array,int left,int right);
+void merge(item_t *a,int left,int middle,int right);
+
+
+int main(int argc,char *argv[])
+{
+	int n_blocks=atoi(argv[1]);
+	item_t (*blocks)[M];
+	int i,j;
+
+	srand((unsigned)time(NULL));
+
+	blocks=malloc(n_blocks*sizeof(*blocks));
+	for(i=0;i<n_blocks;i++){
+		for(j=0;j<M;j++){
+			blocks[i][j]=rand()%10;
+		}
+	}
+	print_block(blocks,n_blocks);
+	putchar('\n');
+
+	block_sort(blocks,0,n_blocks-1);
+	print_block(blocks,n_blocks);
+
+	return(0);
+}
+
+
+void print_block(item_t (*blocks)[M],int n_blocks)
+{
+	int i,j;
+
+	for(i=0;i<n_blocks;i++){
+		for(j=0;j<M;j++){
+			printf("%d ",blocks[i][j]);
+		}
+
+		putchar('\n');
+	}
+}
+
+void block_sort(item_t (*blocks)[M],int left,int right)
+{
+	int i;
+
+	/* Sort every block individually. */
+	for(i=left;i<=right;i++){
+		merge_sort(blocks[i],0,M-1);
+	}
+
+	/* Block sort these blocks, using merging comparator. */
+	do_block_sort(blocks,left,right);
+}
+
+/* Batcher's sort network for block sorting. */
+void do_block_sort(item_t (*blocks)[M],int left,int right)
+{
+	int i,j,k,p;
+	int n=right-left+1;
+
+	for(p=1;p<n;p*=2){
+		for(k=p;k>0;k/=2){
+			for(j=k%p;j+k<n;j+=2*k){
+				for(i=0;i<k;i++){
+					if(j+i+k<n){
+						if((j+i)/(p+p) == (j+i+k)/(p+p)){
+							merge_compare(blocks[left+j+i],blocks[left+j+i+k]);
+						}
+					}
+				}
+			}
+		}
+	}	
+}
+
+/* The merge comparator implemented by abstract in-place merge. */
+void merge_compare(item_t *b1,item_t *b2)
+{
+	int i;
+	item_t *aux;
+	
+	aux=malloc(2*M*sizeof(*aux));
+	for(i=0;i<M;i++){
+		aux[i]=b1[i];
+		aux[i+M]=b2[i];
+	}
+
+	merge(aux,0,M-1,2*M-1);
+
+	for(i=0;i<M;i++){
+		b1[i]=aux[i];
+		b2[i]=aux[i+M];
+	}
+
+	free(aux);
+}
+
+void merge_sort(item_t *array,int left,int right)
+{
+	int middle=(left+right)/2;	
+
+	if(right-left+1<=1){
+		return;
+	}
+
+	merge_sort(array,left,middle);
+	merge_sort(array,middle+1,right);
+	merge(array,left,middle,right);
+}
+
+void merge(item_t *a,int left,int middle,int right)
+{
+	int n=right-left+1;
+	item_t *aux=malloc(n*sizeof(*aux));
+	int i,j,k;
+	
+	for(k=0,i=left;i<=middle;i++){
+		aux[k++]=a[i];
+	}
+	for(i=right;i>middle;i--){
+		aux[k++]=a[i];
+	}
+
+	for(i=0,j=n-1,k=left;k<=right;k++){
+		if(compare_item(aux[i],aux[j])<=0){
+			a[k]=aux[i++];	
+		}else{
+			a[k]=aux[j--];	
+		}
+	}
+
+	free(aux);
+}

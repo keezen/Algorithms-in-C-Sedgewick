@@ -1,0 +1,7 @@
+/*
+** This table gives the values of P for which (N/P)lgN = NPlgP.
+*/
+N		P
+1*E3		2.658
+1*E6		3.372
+1*E9		3.902		

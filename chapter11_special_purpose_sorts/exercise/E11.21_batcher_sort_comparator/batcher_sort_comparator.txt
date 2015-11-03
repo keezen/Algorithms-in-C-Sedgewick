@@ -1,0 +1,11 @@
+N=21
+
+/*
+** We only consider the case where the diplacement is from 0 to 5, because it is symmetric
+** when two displacements add up to 11, for example, it is the same when the displacement is
+** either 5 or 6.
+*/
+Displacement	0	1	2	3	4	5
+Comparator	112	114	114	112	111	112
+
+Comparetor -- the number of comparators for the given sorting network
